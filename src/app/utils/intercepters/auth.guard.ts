@@ -22,13 +22,8 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const aclRoles = ['ADMIN', 'AGENT', 'DESIGNER']
     const isLogged = this.authService.isLoggedIn;
     if (isLogged) {
-      if (!aclRoles.includes(this.role)) {
-        this.customToaster.showWarningMessage('auth.unauthorized');
-        this.authService.SignOut();
-      }
       return true;
     } else {
       return this.router.navigate(['auth']);

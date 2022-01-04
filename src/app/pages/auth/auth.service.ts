@@ -33,7 +33,7 @@ export class AuthService {
         localStorage.setItem('userAccessToken', result.user.za);
         this.customToaster.showSuccessMessage('auth.user-log-success');
         this.SetUserData(result.user);
-        window.location.href = 'auth/configurations';
+        window.location.href = '/';
         this.ngZone.run((res) => {
         });
       }).catch((error: any) => {

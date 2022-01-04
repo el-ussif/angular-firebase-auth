@@ -19,7 +19,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/backoffice/backoffice.module').then(m => m.BackofficeModule),
     canActivate: [
       AuthGuard,
-      UserTypeGuard,
     ],
   },
   {

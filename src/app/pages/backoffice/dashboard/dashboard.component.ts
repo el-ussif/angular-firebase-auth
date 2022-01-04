@@ -9,7 +9,7 @@ import { ServerBridgeService } from 'src/app/utils/http/server-bridge.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  loading: boolean = true;
+  loading: boolean = false;
   statistics: any = {};
   role: string = '';
 
@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true,
   };
+  token: string | null = '';
 
 
   constructor(
@@ -39,67 +40,11 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('userAccessToken')
     this.getStats();
-    this.listenedFrequencyStats();
   }
 
   getStats() {
-    this.loading = true;
-    this.serverBridgeService.loadResource('/users/statistics', false).subscribe(response => {
-      if (response) {
-        this.statistics = response;
-      }
-      this.loading = false;
-    });
-  }
-
-  listenedFrequencyStats() {
-    this.loading = true;
-    this.serverBridgeService.loadResource('/users/listened-frequencies', false).subscribe(response => {
-      if (response && response.perMonths) {
-        const datas = [];
-        for (let i = 1; i < 13; i++) {
-          let data = 0;
-          response.perMonths.forEach((item: any) => {
-            if (item.monthid == i) {
-              data = item.count
-            }
-          });
-          datas.push(data);
-          this.ABarChartLabels.push(this.months[i]);
-        }
-        this.ABarChartData = [
-          {
-            data: datas,
-            pointRadius: 0,
-            fill: false,
-          }
-        ]
-      }
-
-      if (response && response.perYears) {
-        const datas = [];
-        const currentYears = new Date().getFullYear();
-        for (let i = (currentYears-10); i < (currentYears+2); i++) {
-          let data = 0;
-          response.perYears.forEach((item: any) => {
-            if (item.yearid == i) {
-              data = item.count
-            }
-          });
-          datas.push(data);
-          this.yearBarChartLabels.push(i);
-        }
-        this.yearBarChartData = [
-          {
-            data: datas,
-            pointRadius: 0,
-            fill: false,
-          }
-        ]
-      }
-      this.loading = false;
-    });
 
   }
 }
