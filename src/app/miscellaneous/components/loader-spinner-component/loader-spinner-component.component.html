@@ -1,0 +1,12 @@
+<div>
+  <ngx-spinner
+    [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium"
+  >
+    <p class="loading text-uppercase text-white" *ngIf="!message">
+      {{ 'grid.loading' | translate }}
+    </p>
+    <h2 class="loading text-white text-uppercase" *ngIf="message">
+      {{ message }}
+    </h2>
+  </ngx-spinner>
+</div>

@@ -1,0 +1,308 @@
+<ngx-page-main-dashbord
+  [title]="'grid.authors.model' | translate"
+  [hasBody]="true"
+>
+  <div body-content class="container-fluid mt--6" *ngIf="true;">
+    <div class=" row">
+      <div class="col-12">
+        <div class=" card">
+          <div class="card-header">
+            <h5 class="h3 mb-0pt-lg-3 pb-lg-1 text-right">
+              <button
+                type="button" class="btn btn-outline-default"
+                routerLink="/authors/create"
+              >
+                <i class="fa fa-plus"></i>
+                {{ 'buttons.new' | translate }}
+              </button>
+            </h5>
+          </div>
+          <div class=" card-body">
+            <div class="dataTables_wrapper" *ngIf="!loading; else loadingTemplate">
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div class="dataTables_length" id="datatable_length">
+                    <label>
+                      {{ 'grid.show' | translate }}
+                      <select
+                        name="datatable_length"
+                        aria-controls="datatable"
+                        class="form-control form-control-sm"
+                        (change)="entriesChange($event)"
+                      >
+                        <option value="10" [selected]="entries == 10">10</option>
+                        <option value="25" [selected]="entries == 25">25</option>
+                        <option value="50" [selected]="entries == 50">50</option>
+                        <option value="-1" [selected]="entries == -1"> {{ 'buttons.all' | translate }} </option>
+                      </select>
+                      {{ 'grid.entries' | translate }}
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div id="datatable_filter" class="dataTables_filter">
+                    <label>
+                      <input
+                        type="search"
+                        class="form-control form-control-sm"
+                        placeholder="{{ 'grid.datatable.search' | translate }}"
+                        aria-controls="datatable"
+                        (keyup)="filterTable($event)"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <ngx-datatable
+                class="bootstrap selection-cell"
+                [columnMode]="'force'"
+                [headerHeight]="50"
+                [footerHeight]="60"
+                [rowHeight]="'auto'"
+                [limit]="entries != -1 ? entries : undefined"
+                [rows]="temp"
+                (activate)="onActivate($event)"
+              >
+                <ngx-datatable-column prop="pseudo" [name]="'grid.authors.identity' | translate" [sortable]="false"
+                                      [minWidth]="225">
+                  <ng-template let-item="row" let-value="value" ngx-datatable-cell-template>
+                    <td class=" table-user">
+                      <img
+                        class=" avatar rounded-circle mr-2"
+                        [src]="item.profilePic">
+                      <b> {{ item.firstname }} {{ item.lastname }} </b>
+                    </td>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="pseudo" [name]="'grid.authors.pseudo' | translate" [maxWidth]="200">
+                  <ng-template let-item="row" let-value="value" ngx-datatable-cell-template>
+                    <td>
+                      {{ item.pseudo }}
+                    </td>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="email" [name]="'grid.authors.email' | translate" [minWidth]="180">
+                  <ng-template let-item="row" let-value="value" ngx-datatable-cell-template>
+                    <td>
+                      {{ item.email }}
+                    </td>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column
+                  prop="phoneNumber" [name]="'grid.authors.phoneNumber' | translate"
+                                      [minWidth]="150">
+                  <ng-template let-item="row" let-value="value" ngx-datatable-cell-template>
+                    <td>
+                      {{ item.phoneNumber }}
+                    </td>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column prop="collection" [name]="'grid.authors.collections' | translate"
+                                      [maxWidth]="100">
+                  <ng-template let-item="row" let-value="value" ngx-datatable-cell-template>
+                    <td class="text-center">
+                      {{ item?.collections?.length || 0 }}
+                    </td>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column prop="listened" [name]="'grid.authors.listened' | translate" [maxWidth]="100">
+                  <ng-template let-item="row" let-value="value" ngx-datatable-cell-template>
+                    <td class="text-center">
+                      {{ (item.listeningCount || 0) | numberFormat }}
+                    </td>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column prop="pay" [name]="'grid.authors.royalty' | translate" [maxWidth]="115">
+                  <ng-template let-item="row" let-value="value" ngx-datatable-cell-template>
+                    <td class="text-center">
+                      {{ (item.listeningUnpaid || 0) | currencyFormat }}
+                    </td>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column prop="royalty" [name]="'grid.authors.pay' | translate" [maxWidth]="115">
+                  <ng-template let-item="row" let-value="value" ngx-datatable-cell-template>
+                    <td class="text-center">
+                      {{ (item.listeningCount || 0) | currencyFormat }}
+                    </td>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [name]="'grid.actions' | translate"
+                  [sortable]="false" prop="key"
+                  [maxWidth]="100"
+                  style="float: right"
+                >
+                  <ng-template let-item="row" let-value="value" ngx-datatable-cell-template>
+                    <td>
+                      <div class="dropdown">
+                        <a
+                          class="btn btn-sm btn-icon-only text-light"
+                          id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        >
+                          <i class=" fas fa-ellipsis-v"> </i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                             aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="javascript:void()">{{ 'grid.actions' | translate }}</a>
+                          <a
+                            type="button" class="dropdown-item"
+                            (click)="seeAuthor(seeAuthorModale, item)"
+                          >
+                            {{ 'buttons.preview' | translate }}
+                          </a>
+                          <a
+                            type="button" class="dropdown-item"
+                            [routerLink]="'/authors/show/'+ item.id"
+                          >
+                            {{ 'buttons.details' | translate }}
+                          </a>
+                          <a
+                            type="button" class="dropdown-item"
+                            [routerLink]="'/authors/update/'+ item.id"
+                          >
+                            {{ 'buttons.update' | translate }}
+                          </a>
+                          <a
+                            type="button" class="dropdown-item"
+                            (click)="questionToDelete(item.id)"
+                          >
+                            {{ 'buttons.delete' | translate }}
+                          </a>
+                        </div>
+                      </div>
+                    </td>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ngx-page-main-dashbord>
+
+<ng-template #loadingTemplate>
+  <app-custom-loader></app-custom-loader>
+</ng-template>
+
+<ng-template #seeAuthorModale let-modal>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="modal-title" id="modal-basic-title">
+        {{ 'buttons.previewing' | translate }} :: {{ 'grid.authors.model' | translate }}
+      </h4>
+    </div>
+    <div class="card-body container-fluid mt-5">
+      <div class="col-sm-12">
+        <div class="card card-profile">
+          <div class=" row justify-content-center">
+            <div class="col-lg-3 order-lg-2">
+              <div class=" card-profile-image">
+                <img
+                  style="width: 125px; height: 125px; border-radius: 100%;"
+                  [src]="currentAuthor.profilePic"
+                >
+              </div>
+            </div>
+          </div>
+          <div class="card-body mt-5">
+            <div class=" row">
+              <div class=" col">
+                <div class="card-profile-stats d-flex justify-content-center">
+                  <div>
+                    <h3 class="h3">
+                      {{ currentAuthor.firstname }} {{ currentAuthor.lastname }}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6 h4 font-weight-500">
+                <i class="fa fa-envelope-open mr-2"></i>
+                {{ currentAuthor.email }}
+              </div>
+              <div class="col-12 col-md-6 h5 font-weight-500">
+                <i class="fa fa-at mr-2"></i>
+                @{{ currentAuthor.pseudo }}
+              </div>
+              <div class="col-12 col-md-6 h5 font-weight-500">
+                <i class="fa fa-phone mr-2 mt-4"></i>
+                {{ currentAuthor.phoneNumber }}
+              </div>
+              <div class="col-12 col-md-6 h5 mt-4">
+                <i class="ni ni-collection mr-2"></i>
+                {{ 'grid.collections.model' | translate }} ({{ currentAuthor?.collections?.length || 0 }})
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-12 col-md-4">
+                <div class=" card bg-gradient-info border-0">
+                  <div class=" card-body">
+                    <div class=" row">
+                      <div class=" col">
+                        <h6 class=" card-title text-uppercase text-muted mb-0 text-white">
+                          {{ 'grid.authors.listened' | translate }}
+                        </h6>
+                        <span class=" h2 font-weight-bold mb-0 text-white">
+                          {{ (currentAuthor.listeningCount || 0) | numberFormat }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <div class=" card bg-gradient-success border-0">
+                  <div class=" card-body">
+                    <div class=" row">
+                      <div class=" col">
+                        <h6 class=" card-title text-uppercase text-muted mb-0 text-white">
+                          {{ 'grid.authors.royalty' | translate }}
+                        </h6>
+                        <span class=" h2 font-weight-bold mb-0 text-white">
+                          {{ (currentAuthor.listeningUnpaid || 0) | currencyFormat }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class=" col-md-4 col-12">
+                <div class=" card bg-gradient-warning border-0">
+                  <div class=" card-body">
+                    <div class=" row">
+                      <div class=" col">
+                        <h6 class=" card-title text-uppercase text-muted mb-0 text-white">
+                          {{ 'grid.authors.pay' | translate }}
+                        </h6>
+                        <span class=" h2 font-weight-bold mb-0 text-white">
+                          {{ (currentAuthor.listeningCount || 0) | currencyFormat }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer text-right">
+      <div class="container-fluid">
+        <button type="button" class="btn btn-outline-danger" (click)="modal.close('')">
+          <i class="fa fa-times"></i> {{ 'buttons.close' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

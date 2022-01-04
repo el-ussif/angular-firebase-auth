@@ -1,0 +1,196 @@
+<ngx-page-main-dashbord
+  [title]="'grid.tailes.model' | translate"
+  [hasBody]="true"
+>
+  <div body-content class="container-fluid mt--6">
+    <div class=" row">
+      <div class="col-12">
+        <div class=" card">
+          <div class="card-header">
+            <h3 class="h3 mb-0pt-lg-3 pb-lg-1">
+              {{ 'grid.tailes.new' | translate }}
+            </h3>
+          </div>
+          <div class="card-body" *ngIf="!loading; else loadingTemplate">
+            <form class="ng-untouched ng-pristine ng-valid" (ngSubmit)="onSubmit(form)" #form="ngForm">
+              <div class="row">
+                <div class="form-group col-md-6 col-12">
+                  <label class=" form-control-label">
+                    {{ 'grid.tailes.author' | translate }}
+                  </label>
+                  <select
+                    class="form-control"
+                    [name]="('grid.tailes.author' | translate) || 'Auteur'"
+                    required
+                    #author="ngModel"
+                    [(ngModel)]="taile.author"
+                    (ngModelChange)="loadAuthorCollection()"
+                    data-toggle="select"
+                  >
+                    <option [value]="null"></option>
+                    <option *ngFor="let author of authors" [value]="author.id">
+                      {{ author.firstname }} {{ author.lastname }}
+                    </option>
+                  </select>
+                  <p class="text-danger" *ngIf="customFormValidationService.has(author)">
+                    {{ customFormValidationService.first(author) }}
+                  </p>
+                </div>
+                <div class="form-group col-md-6 col-12">
+                  <label class=" form-control-label">
+                    {{ 'grid.tailes.collection' | translate }}
+                  </label>
+                  <select
+                    class="form-control"
+                    [name]="('grid.tailes.collection' | translate) || 'Collection'"
+                    required
+                    #collection="ngModel"
+                    [(ngModel)]="taile.collection"
+                    data-toggle="select"
+                  >
+                    <option [value]="null"></option>
+                    <option *ngFor="let taile of tempCollections" [value]="taile.id">
+                      {{ taile.title }}
+                    </option>
+                  </select>
+                  <p class="text-danger" *ngIf="customFormValidationService.has(collection)">
+                    {{ customFormValidationService.first(collection) }}
+                  </p>
+                </div>
+
+                <div class="form-group col-md-4 col-12">
+                  <label class=" form-control-label">
+                    {{ 'grid.tailes.language' | translate }}
+                  </label>
+                  <select
+                    class="form-control"
+                    [name]="('grid.tailes.language' | translate) || 'Langue'"
+                    required
+                    #language="ngModel"
+                    [(ngModel)]="taile.language"
+                    data-toggle="select"
+                  >
+                    <option [value]="null"></option>
+                    <option *ngFor="let language of languages" [value]="language.id">
+                      {{ language.title }} - {{ language.code }}
+                    </option>
+                  </select>
+                  <p class="text-danger" *ngIf="customFormValidationService.has(language)">
+                    {{ customFormValidationService.first(language) }}
+                  </p>
+                </div>
+
+                <div class="form-group col-md-8 col-12">
+                  <label class=" form-control-label">
+                    {{ 'grid.tailes.title' | translate }}
+                  </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="taile.title"
+                    [name]="('grid.tailes.title' | translate) || 'Titre'"
+                    [placeholder]="'grid.tailes.title' | translate"
+                    #title="ngModel"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                  >
+                  <p class="text-danger" *ngIf="customFormValidationService.has(title)">
+                    {{ customFormValidationService.first(title) }}
+                  </p>
+                </div>
+
+                <!--
+                <div class="form-group col-md-12 col-12">
+                  <label class=" form-control-label">
+                    {{ 'grid.tailes.tags' | translate }}
+                  </label>
+
+                  <ng-select
+                    [(ngModel)]="taile.tags" [multiple]="true"
+                    [name]="('grid.tailes.tags' | translate) || 'Tags'"
+                    [required]="true"
+                    #tag="ngModel"
+                  >
+                    <ng-option *ngFor="let tag of tags" [value]="tag.id">
+                      {{ tag.title }}
+                    </ng-option>
+                  </ng-select>
+
+                  <p class="text-danger" *ngIf="customFormValidationService.has(tag)">
+                    {{ customFormValidationService.first(tag) }}
+                  </p>
+                </div>
+                -->
+
+                <div class="form-group mb-3 col-12">
+                  <ngx-dropzone accept="audio/mp3,audio/*" [multiple]="false" (change)="onSelectAudioFiles($event)">
+                    <ngx-dropzone-label>
+                      {{ 'grid.tailes.audio' | translate }}
+                    </ngx-dropzone-label>
+                    <ngx-dropzone-preview
+                      *ngFor="let f of audioFiles" [removable]="true"
+                      (removed)="onRemoveAudioFiles(f)"
+                    >
+                      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                  </ngx-dropzone>
+                </div>
+
+                <div class="form-group mb-3 col-12">
+                  <ngx-dropzone accept=".png, .jpg, .jpeg" [multiple]="false" (change)="onSelectCoverFiles($event)">
+                    <ngx-dropzone-label>
+                      {{ 'grid.tailes.cover' | translate }}
+                    </ngx-dropzone-label>
+                    <ngx-dropzone-preview
+                      *ngFor="let f of coverFiles" [removable]="true"
+                      (removed)="onRemoveCoverFiles(f)"
+                    >
+                      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                  </ngx-dropzone>
+                </div>
+
+                <div class="form-group col-12 mt-3">
+                  <label class=" form-control-label">
+                    {{ 'grid.tailes.description' | translate }}
+                  </label>
+                  <angular-editor
+                    [(ngModel)]="taile.description"
+                    [config]="{minHeight: '250px', editable: true}"
+                    [name]="('grid.tailes.description' | translate) || 'Description'"
+                    [placeholder]="'grid.tailes.description' | translate"
+                    #description="ngModel"
+                    minlength="25"
+                    required
+                  ></angular-editor>
+
+                  <p class="text-danger" *ngIf="customFormValidationService.has(description)">
+                    {{ customFormValidationService.first(description) }}
+                  </p>
+                </div>
+
+                <div class="form-group text-right col-12">
+                  <button
+                    type="button" class="btn btn-default text-uppercase"
+                    routerLink="/tailes"
+                  >
+                    <i class="fa fa-times"></i> {{ 'buttons.cancel' | translate }}
+                  </button>
+                  <button [disabled]="form.invalid || submited" class="btn btn-success text-uppercase">
+                    <i class="fa fa-save"></i> {{ 'buttons.save' | translate }}
+                  </button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ngx-page-main-dashbord>
+
+<ng-template #loadingTemplate>
+  <app-custom-loader></app-custom-loader>
+</ng-template>

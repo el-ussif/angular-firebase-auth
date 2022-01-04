@@ -1,0 +1,152 @@
+<div class=" main-content">
+  <div class=" header bg-gradient-danger py-7 py-lg-8 pt-lg-9">
+    <div class="separator separator-bottom separator-skew zindex-100">
+      <svg
+        x="0"
+        y="0"
+        viewBox="0 0 2560 100"
+        preserveAspectRatio="none"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
+    </div>
+  </div>
+
+  <div class=" container mt--8 pb-5">
+    <div class=" row justify-content-center">
+      <div class=" col-lg-10 col-md-10">
+        <div class=" card bg-secondary border-0 mb-0">
+          <div class=" card-body px-lg-5 py-lg-5">
+            <div class=" text-center text-muted mb-4">
+              <h3> {{ 'grid.configuration.title' | translate }} </h3>
+            </div>
+            <form role="form" #form="ngForm">
+              <div class="form-group mb-3 col-md-12">
+                <label for="legalForm" class="text-black-50">
+                  {{ 'grid.admin.customer.legalForm' | translate }}
+                </label>
+                <div class="input-group input-group-alternative">
+                  <input
+                    id="legalForm" class="form-control"
+                    type="text"
+                    [(ngModel)]="currentUser.legalForm"
+                    [name]="('grid.admin.customer.legalForm' | translate) || 'Forme Juridique de l\'entreprise'"
+                    [placeholder]="'grid.admin.customer.legalForm' | translate"
+                    #legalForm="ngModel"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                  >
+                </div>
+                <p class="text-danger" *ngIf="customFormValidationService.has(legalForm)">
+                  {{ customFormValidationService.first(legalForm) }}
+                </p>
+              </div>
+
+              <div class="form-group mb-3 col-md-12">
+                <label for="tvaNumber" class="text-black-50">
+                  {{ 'grid.admin.customer.tvaNumber' | translate }}
+                </label>
+                <div class="input-group input-group-alternative">
+                  <input
+                    id="tvaNumber" class="form-control"
+                    type="text"
+                    [(ngModel)]="currentUser.tvaNumber"
+                    [name]="('grid.admin.customer.tvaNumber' | translate) || 'N° de TVA'"
+                    [placeholder]="'grid.admin.customer.tvaNumber' | translate"
+                    #tvaNumber="ngModel"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                  >
+                </div>
+                <p class="text-danger" *ngIf="customFormValidationService.has(tvaNumber)">
+                  {{ customFormValidationService.first(tvaNumber) }}
+                </p>
+              </div>
+
+              <div class="form-group mb-3 col-md-12">
+                <label for="taxAccountNumber" class="text-black-50">
+                  {{ 'grid.admin.customer.taxAccountNumber' | translate }}
+                </label>
+                <div class="input-group input-group-alternative">
+                  <input
+                    id="taxAccountNumber" class="form-control"
+                    type="text"
+                    [(ngModel)]="currentUser.taxAccountNumber"
+                    [name]="('grid.admin.customer.taxAccountNumber' | translate) || 'N° de compte de taxe de l\'entreprise'"
+                    [placeholder]="'grid.admin.customer.taxAccountNumber' | translate"
+                    #taxAccountNumber="ngModel"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                  >
+                </div>
+                <p class="text-danger" *ngIf="customFormValidationService.has(taxAccountNumber)">
+                  {{ customFormValidationService.first(taxAccountNumber) }}
+                </p>
+              </div>
+
+              <div class="form-group mb-3 col-12">
+                <label for="rccmNumber" class="text-black-50">
+                  {{ 'grid.admin.customer.rccmNumber' | translate }}
+                </label>
+                <div class="input-group input-group-alternative">
+                  <input
+                    id="rccmNumber" class="form-control"
+                    type="text"
+                    [(ngModel)]="currentUser.rccmNumber"
+                    [name]="('grid.admin.customer.rccmNumber' | translate) || 'N° RCCM ou registre de commerce de l\'entreprise'"
+                    [placeholder]="'grid.admin.customer.rccmNumber' | translate"
+                    #rccmNumber="ngModel"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                  >
+                </div>
+                <p class="text-danger" *ngIf="customFormValidationService.has(rccmNumber)">
+                  {{ customFormValidationService.first(rccmNumber) }}
+                </p>
+              </div>
+
+              <div class="form-group mb-3 col-12">
+                <ngx-dropzone accept="application/pdf" [multiple]="false"  (change)="onSelectIdCard($event)">
+                  <ngx-dropzone-label>
+                    {{ 'grid.configuration.idCardFile' | translate }}
+                  </ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of filesIdCard" [removable]="true" (removed)="onRemoveIdCard(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+
+              </div>
+
+              <div class="form-group mb-3 col-12">
+                <ngx-dropzone accept="application/pdf" [multiple]="false"  (change)="onSelectAgrementFile($event)">
+                  <ngx-dropzone-label>
+                    {{ 'grid.configuration.agrementFile' | translate }}
+                  </ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of filesAgrementFile" [removable]="true" (removed)="onRemoveAgrementFile(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+
+              </div>
+              <div class="text-center">
+                <button
+                  (click)="onSubmit()"
+                  type="button" class="btn btn-primary my-4 text-uppercase"
+                  [disabled]="(form.invalid || filesAgrementFile.length === 0 || filesIdCard.length === 0)"
+                >
+                  {{ 'auth.configure' | translate }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

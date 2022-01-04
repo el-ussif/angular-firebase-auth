@@ -1,0 +1,582 @@
+<ngx-page-main-dashbord
+  [title]="'user.' + role | translate"
+  [hasBody]="true"
+>
+  <div header-content class=" row" *ngIf="!loading;">
+    <ng-container [ngSwitch]="role">
+      <ng-container *ngSwitchCase="'ADMIN'">
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class=" card-title text-uppercase text-muted mb-0 text-white"> {{ 'grid.statistics.authors' | translate }} </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.authors}} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class=" ni ni-single-02"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.collections' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.collections}} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class=" ni ni-collection"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.tailes' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.tailes}} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class="fa fa-headphones-alt"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.linstingUpaid' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.linstingUpaid | currencyFormat }} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class="fa fa-hand-holding-usd"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.categories' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.categories | numberFormat }} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class="fa fa-layer-group"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.languages' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.languages | numberFormat }} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class="fa fa-language"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.tags' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.tags | numberFormat }} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class="ni ni-tag"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.linsting' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.linsting | numberFormat }} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'DESIGNER'">
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class=" card-title text-uppercase text-muted mb-0 text-white"> {{ 'grid.statistics.collections' | translate }} </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.collections}} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class=" ni ni-collection"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card bg-gradient-orange border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.unvalidateCollections' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.unvalidateCollections}} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class=" ni ni-collection"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.tailes' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.tailes}} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class="fa fa-headphones-alt"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card bg-gradient-warning border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.unvalidateTailes' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.unvalidateTailes | numberFormat }} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class="fa fa-headphones-alt"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'AGENT'">
+        <div class=" col-xl-4 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class=" card-title text-uppercase text-muted mb-0 text-white"> {{ 'grid.statistics.authors' | translate }} </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.authors}} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class=" ni ni-single-02"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-4 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.collections' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.collections}} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class=" ni ni-collection"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-4 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.tailes' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.tailes}} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class="fa fa-headphones-alt"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-4 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.linsting' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.linsting | numberFormat }} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-4 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.linstingUpaid' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.linstingUpaid | currencyFormat }} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class="fa fa-hand-holding-usd"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-4 col-md-6">
+          <div class=" card bg-gradient-default border-0">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5
+                    class="card-title text-uppercase text-muted mb-0 text-white"
+                  >
+                    {{ 'grid.statistics.pay' | translate }}
+                  </h5>
+                  <span class=" h2 font-weight-bold mb-0 text-white"> {{ statistics.linsting | currencyFormat }} </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class=" icon icon-shape bg-white text-dark rounded-circle shadow"
+                  >
+                    <i class="fas fa-money-bill-alt"></i>
+                  </div>
+                </div>
+              </div>
+              <p class=" mt-3 mb-0 text-sm">
+                <a class=" text-nowrap text-white font-weight-600" href="javascript:void(0)">
+                  {{ 'grid.statistics.see-more' | translate }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <div body-content class="container-fluid mt--6" *ngIf="!loading; else loadingTemplate">
+    <div class=" row">
+      <div class="col-md-6 col-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h6 class=" surtitle">{{ 'grid.board.view' | translate }}</h6>
+            <h5 class=" h3 mb-0 text-uppercase"> {{ 'grid.board.listened-frequency' | translate }}</h5>
+          </div>
+          <div class=" card-body">
+            <div class="charts">
+              <canvas
+                baseChart
+                [datasets]="ABarChartData"
+                [labels]="ABarChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType"
+              >
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h6 class=" surtitle">{{ 'grid.board.view' | translate }}</h6>
+            <h5 class=" h3 mb-0 text-uppercase"> {{ 'grid.board.listened-frequency' | translate }}</h5>
+          </div>
+          <div class=" card-body">
+            <div class="charts">
+              <canvas
+                baseChart
+                [datasets]="yearBarChartData"
+                [labels]="yearBarChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType"
+              >
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ngx-page-main-dashbord>
+
+<ng-template #loadingTemplate>
+  <app-custom-loader></app-custom-loader>
+</ng-template>

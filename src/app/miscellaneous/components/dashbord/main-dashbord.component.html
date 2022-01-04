@@ -1,0 +1,20 @@
+<div class="header bg-danger pb-6">
+  <div class=" container-fluid">
+    <div class=" header-body">
+      <div class=" row align-items-center py-4">
+        <div class=" col-lg-6 col-7" style="margin-top: -100px">
+          <h6 class=" h2 text-white text-uppercase d-inline-block mb-0">
+            {{ title }}
+          </h6>
+        </div>
+      </div>
+      <div>
+        <ng-content select="[header-content]"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="hasBody">
+  <ng-content select="[body-content]"></ng-content>
+</div>

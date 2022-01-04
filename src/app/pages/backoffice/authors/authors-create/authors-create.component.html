@@ -1,0 +1,169 @@
+<ngx-page-main-dashbord
+  [title]="'grid.authors.model' | translate"
+  [hasBody]="true"
+>
+  <div body-content class="container-fluid mt--6">
+    <div class=" row">
+      <div class="col-12">
+        <div class=" card">
+          <div class="card-header">
+            <h3 class="h3 mb-0pt-lg-3 pb-lg-1">
+              {{ 'grid.authors.new' | translate }}
+            </h3>
+          </div>
+          <div class="card-body">
+            <form class="ng-untouched ng-pristine ng-valid" (ngSubmit)="onSubmit(form)" #form="ngForm">
+              <div class="row">
+                <div class="form-group col-md-6 col-12">
+                  <label class=" form-control-label">
+                    {{ 'grid.authors.firstname' | translate }}
+                  </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="author.firstname"
+                    [name]="('grid.authors.firstname' | translate) || 'Prénoms'"
+                    [placeholder]="'grid.authors.firstname' | translate"
+                    #firstname="ngModel"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                  >
+                  <p class="text-danger" *ngIf="customFormValidationService.has(firstname)">
+                    {{ customFormValidationService.first(firstname) }}
+                  </p>
+                </div>
+
+                <div class="form-group col-md-6 col-12">
+                  <label class=" form-control-label">
+                    {{ 'grid.authors.lastname' | translate }}
+                  </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="author.lastname"
+                    [name]="('grid.authors.lastname' | translate) || 'Nom'"
+                    [placeholder]="'grid.authors.lastname' | translate"
+                    #lastname="ngModel"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                  >
+                  <p class="text-danger" *ngIf="customFormValidationService.has(lastname)">
+                    {{ customFormValidationService.first(lastname) }}
+                  </p>
+                </div>
+
+                <div class="form-group col-md-4 col-12">
+                  <label class=" form-control-label">
+                    {{ 'grid.authors.email' | translate }}
+                  </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="author.email"
+                    [name]="('grid.authors.email' | translate) || 'E-mail'"
+                    [placeholder]="'grid.authors.email' | translate"
+                    #email="ngModel"
+                    maxlength="60"
+                    required
+                    [email]="true"
+                  >
+                  <p class="text-danger" *ngIf="customFormValidationService.has(email)">
+                    {{ customFormValidationService.first(email) }}
+                  </p>
+                </div>
+
+                <div class="form-group col-md-4 col-12">
+                  <label class=" form-control-label">
+                    {{ 'grid.authors.pseudo' | translate }}
+                  </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="author.pseudo"
+                    [name]="('grid.authors.pseudo' | translate) || 'Pseudo'"
+                    [placeholder]="'grid.authors.pseudo' | translate"
+                    #pseudo="ngModel"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                  >
+                  <p class="text-danger" *ngIf="customFormValidationService.has(pseudo)">
+                    {{ customFormValidationService.first(pseudo) }}
+                  </p>
+                </div>
+
+                <div class="form-group col-md-4 col-12">
+                  <label class=" form-control-label">
+                    {{ 'grid.authors.phoneNumber' | translate }}
+                  </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="author.phoneNumber"
+                    [name]="('grid.authors.phoneNumber' | translate) || 'Numéro de téléphone'"
+                    [placeholder]="'grid.authors.phoneNumber' | translate"
+                    #phoneNumber="ngModel"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                  >
+                  <p class="text-danger" *ngIf="customFormValidationService.has(phoneNumber)">
+                    {{ customFormValidationService.first(phoneNumber) }}
+                  </p>
+                </div>
+
+                <div class="form-group mb-3 col-12">
+                  <ngx-dropzone accept=".png, .jpg, .jpeg" [multiple]="false" (change)="onSelectProfilePicFiles($event)">
+                    <ngx-dropzone-label>
+                      {{ 'grid.authors.profilePic' | translate }}
+                    </ngx-dropzone-label>
+                    <ngx-dropzone-preview
+                      *ngFor="let f of profilePicFiles" [removable]="true"
+                      (removed)="onRemoveProfilePicFiles(f)"
+                    >
+                      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                  </ngx-dropzone>
+                </div>
+                <div class="form-group col-12 mt-3">
+                  <label class=" form-control-label">
+                    {{ 'grid.authors.bio' | translate }}
+                  </label>
+                  <angular-editor
+                    [(ngModel)]="author.bio"
+                    [config]="{minHeight: '250px', editable: true}"
+                    [name]="('grid.authors.bio' | translate) || 'Biographie'"
+                    [placeholder]="'grid.authors.bio' | translate"
+                    #bio="ngModel"
+                    minlength="25"
+                    required
+                  ></angular-editor>
+
+                  <p class="text-danger" *ngIf="customFormValidationService.has(bio)">
+                    {{ customFormValidationService.first(bio) }}
+                  </p>
+                </div>
+                <div class="form-group text-right col-12">
+                  <button
+                    type="button" class="btn btn-default text-uppercase"
+                    routerLink="/authors"
+                  >
+                    <i class="fa fa-times"></i> {{ 'buttons.cancel' | translate }}
+                  </button>
+                  <button [disabled]="form.invalid || submited" class="btn btn-success text-uppercase">
+                    <i class="fa fa-save"></i> {{ 'buttons.save' | translate }}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ngx-page-main-dashbord>
+
+<ng-template #loadingTemplate>
+</ng-template>

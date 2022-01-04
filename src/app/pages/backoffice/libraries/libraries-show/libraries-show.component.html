@@ -1,0 +1,396 @@
+<ngx-page-main-dashbord
+  [title]="'grid.tailes.model' | translate"
+  [hasBody]="true"
+>
+  <div body-content class="container-fluid mt--6" *ngIf="!loading; else loadingTemplate">
+    <div class="card">
+      <div class="card-header">
+        <div class="row container-fluid">
+          <div class="col-md-6 col-12 text-left">
+            <h4 class="modal-title">
+              {{ taile.title }}
+            </h4>
+          </div>
+          <div class="text-right col-md-6 col-12">
+            <button
+              type="button" class="btn btn-outline-dark"
+              [routerLink]="'/tailes'"
+            >
+              <i class="fa fa-sign-out-alt"></i> {{ 'buttons.back' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body container-fluid">
+        <div class="col-sm-12">
+          <div class="card card-profile">
+            <div class=" row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class=" card-profile-image">
+                  <img
+                    style="width: 125px; height: 125px; border-radius: 100%;"
+                    [src]="taile.cover"
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="card-body mt-5">
+              <!--
+              <div class=" row">
+                <div class=" col">
+                  <div class="card-profile-stats d-flex justify-content-center">
+                    <div><span class=" heading"> 22 </span><span class=" description"> Lectures </span></div>
+                  </div>
+                </div>
+              </div>
+              -->
+              <div class="row">
+                <h5 class="h3 text-center col-12 mb-3">
+                  {{ taile?.author?.firstname }} {{ taile?.author?.lastname }}
+                </h5>
+
+                <ng-container *ngIf="role === 'ADMIN' || role === 'AGENT'">
+                  <div class="col-12 col-md-4 h5">
+                    <button
+                      type="button" class="btn btn-outline-danger btn-sm"
+                      (click)="questionToDelete(taile.id)"
+                    >
+                      <i class="fa fa-trash-alt"></i> {{ 'buttons.delete' | translate }}
+                    </button>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="role === 'DESIGNER'">
+                  <div class="col-12 col-md-4 h5">
+                    <button
+                      type="button" class="btn btn-outline-dark disabled btn-sm"
+                    >
+                      <i class="fa fa-ban"></i> {{ 'buttons.delete' | translate }}
+                    </button>
+                  </div>
+                </ng-container>
+
+                <ng-container *ngIf="role === 'ADMIN' || role === 'DESIGNER'">
+                  <div
+                    class="col-12 col-md-4 h5" style="cursor: pointer"
+                    (click)="questionToValidateCover(taile.id)"
+                  >
+                    <i class="fa fa-check-double mr-2"></i>
+                    {{ 'grid.tailes.cover-validate' | translate }}
+                    <span class="badge badge-pill badge-lg badge-success text-uppercase"
+                          *ngIf="taile.coverDesigned">
+                  {{ 'buttons.yes' | translate }}
+                </span>
+                    <span class="badge badge-pill badge-lg badge-danger text-uppercase"
+                          *ngIf="!taile.coverDesigned">
+                  {{ 'buttons.no' | translate }}
+                </span>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="role === 'ADMIN'">
+                  <div class="col-12 col-md-4 h5 text-right" style="cursor: pointer"
+                       (click)="questionToValidateContent(taile.id)">
+                    <i class="fa fa-check-double mr-2"></i>
+                    {{ 'grid.tailes.admin-validate' | translate }}
+                    <span class="badge badge-pill badge-lg badge-success text-uppercase"
+                          *ngIf="taile.validated">
+                  {{ 'buttons.yes' | translate }}
+                </span>
+                    <span class="badge badge-pill badge-lg badge-danger text-uppercase"
+                          *ngIf="!taile.validated">
+                  {{ 'buttons.no' | translate }}
+                </span>
+                  </div>
+                </ng-container>
+
+                <ng-container *ngIf="role === 'AGENT'">
+                  <div
+                    class="col-12 col-md-4 h5"
+                  >
+                    <i class="fa fa-check-double mr-2"></i>
+                    {{ 'grid.tailes.cover-validate' | translate }}
+                    <span class="badge badge-pill badge-lg badge-success text-uppercase"
+                          *ngIf="taile.coverDesigned">
+                  {{ 'buttons.yes' | translate }}
+                </span>
+                    <span class="badge badge-pill badge-lg badge-danger text-uppercase"
+                          *ngIf="!taile.coverDesigned">
+                  {{ 'buttons.no' | translate }}
+                </span>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="role === 'DESIGNER' || role === 'AGENT'">
+                  <div class="col-12 col-md-4 h5 text-right">
+                    <i class="fa fa-check-double mr-2"></i>
+                    {{ 'grid.tailes.admin-validate' | translate }}
+                    <span class="badge badge-pill badge-lg badge-success text-uppercase"
+                          *ngIf="taile.validated">
+                  {{ 'buttons.yes' | translate }}
+                </span>
+                    <span class="badge badge-pill badge-lg badge-danger text-uppercase"
+                          *ngIf="!taile.validated">
+                  {{ 'buttons.no' | translate }}
+                </span>
+                  </div>
+                </ng-container>
+
+                <div class="col-12 col-md-9 h3 mt-4 font-weight-500">
+                  <i class="ni ni-collection mr-2"></i>
+                  {{ taile?.collection?.title }}
+                </div>
+                <div class="col-12 col-md-3 h3 text-right mt-4 font-weight-500">
+                  <i class="fa fa-language mr-2"></i>
+                  {{ taile?.language?.title }}
+                </div>
+                <!--
+                <div class="col-12 col-md-12 h5 font-weight-500">
+                  <i class="ni ni-tag mr-2 mt-4"></i>
+                  <span *ngFor="let tag of taile.tags"
+                        class="badge badge-pill badge-lg badge-dark mx-2 px-2 text-uppercase">
+                    {{ tag.title }}
+                  </span>
+                </div>
+                -->
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <accordion [isAnimated]="true" [closeOthers]="true">
+              <accordion-group #group [isOpen]="false" [isDisabled]="false">
+                <div accordion-heading class="">
+                  <div class="row">
+                    <div class="col-md-6 col-12 text-left">
+                      <h5 class=" h3 mb-0">
+                        {{ 'grid.tailes.read-audio' | translate }} ({{ taile.title }})
+                      </h5>
+                    </div>
+                    <div class="col-12 col-md-6 text-right">
+                      <button
+                        type="button" class="btn btn-outline-dark"
+                      >
+                        <i class="fa fa-play"></i> {{ 'buttons.play' | translate }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <ngx-audio-player
+                    [playlist]="tracks"
+                    [displayTitle]="true"
+                    [autoPlay]="false"
+                    [displayPlaylist]="false"
+                    [pageSizeOptions]="[]"
+                    [displayVolumeControls]="true"
+                    [displayRepeatControls]="false"
+                    [disablePositionSlider]="true"
+                    [displayArtist]="true"
+                    [displayDuration]="true"
+                    [expanded]="true"
+                  ></ngx-audio-player>
+                </div>
+                <div class="card-body mt--5">
+                  <h2>{{ 'grid.tailes.description' | translate }}</h2>
+                  <div [innerHtml]="taile.description"></div>
+                </div>
+              </accordion-group>
+            </accordion>
+
+            <accordion [isAnimated]="true" [closeOthers]="true">
+              <accordion-group #group [isOpen]="false" [isDisabled]="true">
+              <span accordion-heading>
+                <div class="row">
+                    <div class="col-md-6 col-12 text-left">
+                      <h5 class=" h3 mb-0">
+                        <i class='fa fa-language'></i>
+                        {{ 'grid.tailes.other-language' | translate }} ({{taile?.contentTranslates?.length}})
+                      </h5>
+                    </div>
+                    <div class="col-12 col-md-6 text-right">
+                      <button
+                        type="button" class="btn btn-outline-dark"
+                        (click)="openContentTranslateForm(contentTranslateFormModale)"
+                      >
+                        <i class="fa fa-plus"></i> {{ 'buttons.add' | translate }}
+                      </button>
+                    </div>
+                  </div>
+              </span>
+              </accordion-group>
+            </accordion>
+
+            <accordion [isAnimated]="true" [closeOthers]="true">
+              <ng-container *ngFor="let contentTranslate of taile.contentTranslates">
+                <accordion-group>
+                  <h5 class="mb-0" accordion-heading>
+                    {{ contentTranslate?.language?.code }} - {{ contentTranslate?.language?.title }}
+                  </h5>
+                  <div class="card-body row">
+                    <div class="col-md-8 col-12">
+                      <ngx-audio-player
+                        *ngIf="contentTranslate && contentTranslate.audio"
+                        [playlist]="getPlaylist(contentTranslate)"
+                        [displayTitle]="true"
+                        [autoPlay]="false"
+                        [displayPlaylist]="false"
+                        [pageSizeOptions]="[]"
+                        [displayVolumeControls]="true"
+                        [displayRepeatControls]="false"
+                        [disablePositionSlider]="true"
+                        [displayArtist]="true"
+                        [displayDuration]="true"
+                        [expanded]="true"
+                      ></ngx-audio-player>
+                      <h4 class="h3" *ngIf="!(contentTranslate && contentTranslate.audio)">
+                        {{ 'grid.tailes.audio-unavailable' | translate }}
+                      </h4>
+                    </div>
+                    <div class="col-md-4 col-12 text-right">
+                      <button
+                        type="button" class="btn btn-outline-info"
+                        (click)="openContentTranslateForm(contentTranslateFormModale, contentTranslate)"
+                      >
+                        <i class="fa fa-edit"></i> {{ 'buttons.edit' | translate }}
+                      </button>
+                      <button
+                        type="button" class="btn btn-outline-danger"
+                        (click)="questionToDeleteContentTranslate(contentTranslate.id)"
+                      >
+                        <i class="fa fa-trash-alt"></i> {{ 'buttons.delete' | translate }}
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body mt--5">
+                    <h2>{{ 'grid.tailes.description' | translate }}</h2>
+                    <div [innerHtml]="contentTranslate.description"></div>
+                  </div>
+                </accordion-group>
+              </ng-container>
+
+            </accordion>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer text-right">
+        <div class="container-fluid">
+          <button
+            *ngIf="role === 'AGENT' || role === 'ADMIN'"
+            class="btn btn-outline-dark"
+            [routerLink]="'/tailes/update/'+ taile.id"
+          >
+            <i class="fa fa-edit"></i> {{ 'buttons.edit' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ngx-page-main-dashbord>
+
+<ng-template #loadingTemplate>
+  <app-custom-loader></app-custom-loader>
+</ng-template>
+
+<ng-template #contentTranslateFormModale let-modal>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="modal-title" id="modal-basic-title">
+
+      </h4>
+    </div>
+    <div class="card-body container-fluid">
+      <div class="col-sm-12">
+        <form class="ng-untouched ng-pristine ng-valid" (ngSubmit)="onSubmit(form)" #form="ngForm">
+          <div class="row">
+            <div class="form-group col-md-12 col-12">
+              <label class=" form-control-label">
+                {{ 'grid.tailes.language' | translate }}
+              </label>
+              <select
+                class="form-control"
+                [name]="('grid.tailes.language' | translate) || 'Langue'"
+                required
+                #language="ngModel"
+                [(ngModel)]="contentTranslate.language"
+                data-toggle="select"
+              >
+                <option [value]="null"></option>
+                <option *ngFor="let language of languages" [value]="language.id">
+                  {{ language.title }} - {{ language.code }}
+                </option>
+              </select>
+              <p class="text-danger" *ngIf="customFormValidationService.has(language)">
+                {{ customFormValidationService.first(language) }}
+              </p>
+            </div>
+            <!--
+            <div class="form-group col-md-12 col-12">
+              <label class=" form-control-label">
+                {{ 'grid.tailes.title' | translate }}
+              </label>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="contentTranslate.title"
+                [name]="('grid.tailes.title' | translate) || 'Titre'"
+                [placeholder]="'grid.tailes.title' | translate"
+                #title="ngModel"
+                minlength="2"
+                maxlength="60"
+                required
+              >
+              <p class="text-danger" *ngIf="customFormValidationService.has(title)">
+                {{ customFormValidationService.first(title) }}
+              </p>
+            </div>
+            -->
+            <div class="form-group mb-3 col-12">
+              <ngx-dropzone accept="audio/mp3,audio/*" [multiple]="false" (change)="onSelectAudioFiles($event)">
+                <ngx-dropzone-label>
+                  {{ 'grid.tailes.audio' | translate }}
+                </ngx-dropzone-label>
+                <ngx-dropzone-preview
+                  *ngFor="let f of audioFiles" [removable]="true"
+                  (removed)="onRemoveAudioFiles(f)"
+                >
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+
+            <div class="form-group col-12 mt-3">
+              <label class=" form-control-label">
+                {{ 'grid.tailes.description' | translate }}
+              </label>
+              <angular-editor
+                [(ngModel)]="contentTranslate.description"
+                [config]="{minHeight: '250px', editable: true}"
+                [name]="('grid.tailes.description' | translate) || 'Description'"
+                [placeholder]="'grid.tailes.description' | translate"
+                #description="ngModel"
+                minlength="25"
+                required
+              ></angular-editor>
+
+              <p class="text-danger" *ngIf="customFormValidationService.has(description)">
+                {{ customFormValidationService.first(description) }}
+              </p>
+            </div>
+
+            <div class="form-group text-right col-12">
+              <button
+                type="button" class="btn btn-default text-uppercase"
+                (click)="modal.close('')"
+              >
+                <i class="fa fa-times"></i> {{ 'buttons.cancel' | translate }}
+              </button>
+              <button [disabled]="form.invalid || submited" class="btn btn-success text-uppercase">
+                <i class="fa fa-save"></i> {{ 'buttons.save' | translate }}
+              </button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>

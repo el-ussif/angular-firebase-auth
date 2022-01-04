@@ -1,0 +1,59 @@
+<ngx-page-main-dashbord
+  [title]="'grid.categories.model' | translate"
+  [hasBody]="true"
+>
+  <div body-content class="container-fluid mt--6" *ngIf="!0;">
+    <div class=" row">
+      <div class="col-12">
+        <div class=" card">
+          <div class="card-header">
+            <h3 class="h3 mb-0pt-lg-3 pb-lg-1">
+              {{ 'grid.categories.new' | translate }}
+            </h3>
+          </div>
+          <div class="card-body">
+            <form class="ng-untouched ng-pristine ng-valid" (ngSubmit)="onSubmit(form)" #form="ngForm">
+              <div class="row">
+                <div class="form-group col-md-12 col-12">
+                  <label class=" form-control-label">
+                    {{ 'grid.categories.title' | translate }}
+                  </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="category.title"
+                    [name]="('grid.categories.title' | translate) || 'Titre'"
+                    [placeholder]="'grid.categories.title' | translate"
+                    #title="ngModel"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                  >
+                  <p class="text-danger" *ngIf="customFormValidationService.has(title)">
+                    {{ customFormValidationService.first(title) }}
+                  </p>
+                </div>
+                <div class="form-group text-right col-12">
+                  <button
+                    type="button" class="btn btn-default text-uppercase"
+                    routerLink="/categories"
+                  >
+                    <i class="fa fa-times"></i> {{ 'buttons.cancel' | translate }}
+                  </button>
+                  <button [disabled]="form.invalid || submited" class="btn btn-success text-uppercase">
+                    <i class="fa fa-save"></i> {{ 'buttons.save' | translate }}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ngx-page-main-dashbord>
+
+<ng-template #loadingTemplate>
+
+</ng-template>

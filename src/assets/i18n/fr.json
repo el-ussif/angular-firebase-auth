@@ -1,0 +1,508 @@
+{
+  "sidebar": {
+  },
+  "constant": {
+    "app-name": "HEYGRIO"
+  },
+  "date": {
+    "locale": "fr",
+    "long_format": "Do MMMM YYYY"
+  },
+  "messages": {
+    "unautorized": "Vous n'êtes pas autorisés à effectuer cette action ou à acceder à cette ressource."
+  },
+  "user": {
+    "ADMIN": "Administrateur",
+    "DESIGNER": "Designer",
+    "AGENT": "Agent",
+    "USER": "Utilisateur"
+  },
+  "validations": {
+    "alpha": "Le champ :field ne peut contenir que des lettres",
+    "alpha_num": "Le champ :field ne peut contenir que des caractères alpha-numériques",
+    "alpha_dash": "Le champ :field ne peut contenir que des caractères alpha-numériques, tirets ou soulignés",
+    "alpha_spaces": "Le champ :field ne peut contenir que des lettres ou des espaces",
+    "range": "Le champ :field doit être compris entre :value1 et :value2",
+    "confirmed": "Le champ :field ne correspond pas",
+    "digits": "Le champ :field doit être un nombre entier de :value chiffres",
+    "dimensions": "Le champ :field doit avoir une taille de {width} pixels par {height} pixels",
+    "email": "Le champ :field doit être une adresse e-mail valide",
+    "excluded": "Le champ :field doit être une valeur valide",
+    "ext": "Le champ :field doit être un fichier valide",
+    "image": "Le champ :field doit être une image",
+    "integer": "Le champ :field doit être un entier",
+    "length": "Le champ :field doit contenir :value caractères",
+    "max": "Le champ :field doit avoir une valeur de {max} ou moins",
+    "maxlength": "Le champ :field ne peut pas contenir plus de :value caractères",
+    "mimes": "Le champ :field doit avoir un type MIME valide",
+    "min": "Le champ :field doit avoir une valeur de {min} ou plus",
+    "minlength": "Le champ :field doit contenir au minimum :value caractères",
+    "number": "Le champ :field ne peut contenir que des chiffres",
+    "oneOf": "Le champ :field doit être une valeur valide",
+    "regex": "Le champ :field est invalide",
+    "required": "Le champ :field est obligatoire",
+    "url": "Le champ :field doit être une url valide",
+    "size": "Le champ :field doit avoir un poids inférieur à {size}KB",
+    "creditCard": "Le champ :field doit être une carte de crédit valide",
+    "date": "Le champ :field doit être une date valide",
+    "minDate": "La date du champ :field doit être postérieur à :value",
+    "maxDate": "La date du champ :field doit être antérieur à :value",
+    "equal": "La valeur du champ :field doit être egale à :value",
+    "lt": "La valeur du champ :field doit être inférieur à :value",
+    "lte": "La valeur du champ :field doit être inférieur ou egale à :value",
+    "gt": "La valeur du champ :field doit être supérieur à :value",
+    "gte": "La valeur du champ :field doit être supérieur ou egale à :value",
+    "equalTo": "Le champ :field ne correspond pas au champs :value."
+  },
+  "months": {
+    "1": "Janvier",
+    "2": "Février",
+    "3": "Mars",
+    "4": "Avril",
+    "5": "Mai",
+    "6": "Juin",
+    "7": "Juillet",
+    "8": "Août",
+    "9": "Septembre",
+    "10": "Octobre",
+    "11": "Novembre",
+    "12": "Décembre"
+  },
+  "operations":{
+    "pending": "Requête en cours d'exécution....",
+    "success": "Opération éffectuée avec succès",
+    "error": "Des erreurs sont survenues lors de l'exécution de votre action. Veuillez réessayer s'il vous plaît"
+  },
+  "grid": {
+    "account": {
+      "validate-error": "Des erreurs sont survenues lors de la validation du compte de cette entreprise, veuillez ressayer svp.",
+      "validate-success": "Le compte de cette entreprise est validé avec succès",
+      "block-error": "Des erreurs sont survenues lors du blocage du compte de cette entreprise, veuillez ressayer svp.",
+      "block-success": "Le compte de cette entreprise est bloqué avec succès"
+    },
+    "languages": {
+      "model": "Langues",
+      "can-t-be-update": "Impossible d'effectuer la modification",
+      "new": "Enregistrement d'une nouvelle langue",
+      "update": "Modification d'une langue",
+      "title": "Titre",
+      "type": "Type",
+      "code": "Code",
+      "types": {
+        "MAIN": "Internationale",
+        "LOCAL": "Locale"
+      }
+    },
+    "categories": {
+      "model": "Catégories",
+      "can-t-be-update": "Impossible d'effectuer la modification",
+      "new": "Enregistrement d'une nouvelle catégorie",
+      "update": "Modification d'une catégorie",
+      "title": "Titre"
+    },
+    "tags": {
+      "model": "Etiquêttes",
+      "can-t-be-update": "Impossible d'effectuer la modification",
+      "new": "Enregistrement d'une nouvelle étiquette",
+      "update": "Modification d'une étiquette",
+      "title": "Titre"
+    },
+    "statistics": {
+      "pay": "Solde total généré",
+      "tags": "Etiquêttes",
+      "tailes": "Contes/Histoires",
+      "authors": "Auteurs",
+      "userCount": "Utilisateurs",
+      "languages": "Langues",
+      "adminCount": "Administrateurs",
+      "agentCount": "Agents",
+      "categories": "Catégories",
+      "collections": "Collections",
+      "designerCount": "Designers",
+      "unvalidateTailes": "Hist. non validés",
+      "unvalidateCollections": "Col. non validés",
+      "linsting": "Écoute total",
+      "linstingUpaid": "Rédevence total",
+      "see-more": "Voir plus"
+    },
+    "authors": {
+      "empty-file": "Vous n'avez pas selectionné la photo de l'auteur. Veuillez le selectionner et continuer",
+      "identity": "Identité",
+      "model": "Auteurs",
+      "can-t-be-update": "Impossible d'effectuer la modification",
+      "new": "Enregistrement d'un nouvel auteur",
+      "update": "Modification d'un auteur",
+      "pseudo": "Pseudonyme",
+      "email": "E-mail",
+      "firstname": "Prénoms",
+      "lastname": "Nom",
+      "collections": "Collections",
+      "pay": "Solde",
+      "listened": "Écoutes",
+      "royalty": "Redevence",
+      "phoneNumber": "N° de téléphone",
+      "bio": "Biographie",
+      "profilePic": "Photo de l'auteur"
+    },
+    "collections": {
+      "empty-file": "Vous n'avez pas selectionné la photo de couverture. Veuillez le selectionner et continuer",
+      "identity": "Identité",
+      "model": "Collections",
+      "can-t-be-update": "Impossible d'effectuer la modification sur cette collection",
+      "new": "Enregistrement d'une nouvelle collection",
+      "update": "Modification d'une collection",
+      "description": "Description",
+      "cover": "Photo de couverture",
+      "title": "Titre",
+      "author": "Auteur",
+      "tailes": "Contes",
+      "designed": "Designé",
+      "validated": "Validé",
+      "category": "Categorie"
+    },
+    "tailes": {
+      "audio-unavailable": "Audio non disponible",
+      "model": "Contes",
+      "other-language": "Autres langues",
+      "identity": "Détails",
+      "histories": "Histoires ou Contes",
+      "empty-cover-file": "Vous n'avez pas selectionné la photo de couverture. Veuillez le selectionner et continuer",
+      "empty-audio-file": "Vous n'avez pas selectionné le fichier audio. Veuillez le selectionner et continuer",
+      "can-t-be-update": "Impossible d'effectuer la modification sur ce conte",
+      "new": "Enregistrement d'une nouveau conte",
+      "update": "Modification d'un conte ou d'une histoire",
+      "description": "Description",
+      "cover": "Photo de couverture",
+      "audio": "Fichier audio",
+      "read-audio": "Lecture de l'audio",
+      "admin-validate": "Administrateur",
+      "cover-validate": "Designeur",
+      "title": "Titre",
+      "author": "Auteur",
+      "tailes": "Contes",
+      "collection": "collection",
+      "language": "Langue",
+      "tags": "Etiquêttes",
+      "designed": "Designé",
+      "category": "Categorie",
+      "name": "Nom"
+    },
+    "users": {
+      "identity": "Identité",
+      "model": "Utilisateurs",
+      "status": "Compte Actif",
+      "can-t-be-update": "Impossible d'effectuer la modification",
+      "new": "Enregistrement d'un nouvel auteur",
+      "update": "Modification d'un auteur",
+      "pseudo": "Pseudonyme",
+      "email": "E-mail",
+      "firstname": "Prénoms",
+      "lastname": "Nom",
+      "collections": "Collections",
+      "roles": "roles",
+      "disable": "Bloquer",
+      "enable": "Débloquer",
+      "listened": "Écoutes",
+      "royalty": "Redevence",
+      "phoneNumber": "N° de téléphone",
+      "bio": "Biographie",
+      "role": "Rôle",
+      "profilePic": "Photo de l'auteur"
+    },
+    "total": "Total",
+    "delete_confirm": "Confirmation de suppression",
+    "actions": "Actions",
+    "download": "Télécharger",
+    "change-pic": "Changer la photo",
+    "show": "Afficher",
+    "entries": "Élements",
+    "datatable.search": "Recherche...",
+    "back": "Retour",
+    "deleting": "Suppression",
+    "delete_title": "Confirmation de suppression",
+    "delete_confirmation_question": "Êtes vous sûr de vouloir supprimer cette ressource ?",
+    "loading": "Chargement....",
+    "question_delete": "Voulez-vous vraiment supprimer cette ressource ?",
+    "board": {
+      "title": "TABLEAU DE BORD",
+      "customersCount": "Total Client",
+      "view": "APERÇU",
+      "listened-frequency": "Fréquence d'écoute"
+    },
+    "user": {
+      "layout-title": "Administrateurs confirmés",
+      "continue-with": "Continuer avec",
+      "type-account": {
+        "super-admin": "Un compte Super Admin",
+        "customer": "Un compte client",
+        "investor": "Un compte investisseur",
+        "provider": "Un compte fournisseur"
+      },
+      "layout": "Administrateurs",
+      "no-confirmed-title": "Administrateurs non confirmés",
+      "formTitle": "Gest. des administrateurs",
+      "customer": "Les clients",
+      "details": "Informations et détails sur l'administrateur",
+      "name": "Nom de l'administrateur",
+      "email": "E-mail",
+      "active": "Actif",
+      "block": "Bloqué",
+      "account-type": "Type de compte",
+      "roles": {
+        "CUSTOMER_ADMIN": "Client",
+        "SUPER_ADMIN": "Administrateur",
+        "CUSTOMER_SUPER_ADMIN": "Entreprise d'un client",
+        "PROVIDER_SUPER_ADMIN": "Entreprise d'un fournisseur",
+        "PROVIDER_ADMIN": "Fournisseur simple",
+        "INVESTOR": "Investisseur"
+      },
+      "colors": {
+        "CUSTOMER_ADMIN": "info",
+        "SUPER_ADMIN": "danger",
+        "CUSTOMER_SUPER_ADMIN": "success",
+        "PROVIDER_SUPER_ADMIN": "success",
+        "PROVIDER_ADMIN": "info",
+        "INVESTOR": "dark"
+      },
+      "created-at": "Membre depuis",
+      "status": "Status",
+      "confirm-state": "État",
+      "confirm-yes": "Confirmé",
+      "confirm-no": "Non confirmé",
+      "legalForm": "Forme Juridique",
+      "tvaNumber": "N° de TVA",
+      "taxAccountNumber": "N° de compte de taxe",
+      "rccmNumber": "N° RCCM ou registre de commerce",
+      "cutting_date": "Date de découpage",
+      "store-success": "Utilisateur enregistré avec succès",
+      "update-success": "Utilisateur modifié avec succès",
+      "store-error": "Des erreurs sont survenues lors de l'enregistrement de l'utilisateur, veuillez ressayer svp.",
+      "update-error": "Des erreurs sont survenues lors de la modification du compte de cet utilisateur, veuillez ressayer svp.",
+      "empty": "La liste des investisseurs est vide"
+    }
+  },
+  "auth": {
+    "unauthorized": "Vous n'êtes pas autorisé à accéder à cette ressource",
+    "email": "E-mail",
+    "signin-title": "Connexion",
+    "signin": "Se connecter",
+    "configure": "Configurer",
+    "account-config": "Votre tableau de bord est encours de configuration",
+    "forgot-password": "Mot de pase oublier ?",
+    "user-log-success": "Vous êtes connectés avec succès et bienvenu à vous.",
+    "password": "Mot de passe",
+    "reset-password": "Réinitialiser",
+    "reset-password-success": "Mot de passe réinitialiser avec succès,",
+    "confirm-password": "Confirmer le mot de passe",
+    "old-password": "Ancien mot de passe",
+    "email-password-sent": "E-mail de réinitialisation du mot de passe envoyé, vérifiez votre boîte de réception.",
+    "return-to-login": "Retour à la page de connexion",
+    "remind-password": "Je me souviens de mon mot de passe",
+    "reset-password-button": "ENVOYER LE MESSAGE",
+    "reset-password-title": "Réinitialisation de mot de passe",
+    "reset-password-definition": "Définition d'un nouveau mot de passe",
+    "reset-password-text": "Mot de passe oublié? Aucun problème. Communiquez-nous simplement votre adresse e-mail et nous vous enverrons par e-mail un lien de réinitialisation de mot de passe qui vous permettra d'en choisir un nouveau.",
+    "send-email-password": "",
+    "wrong-password": "Identifiants de connexion invalides.",
+    "network-request-failed": "Veuillez vérifier votre connexion Internet",
+    "too-many-requests": "Nous avons détecté trop de demandes de votre appareil. Faites une pause s'il vous plaît !",
+    "user-disabled": "Votre compte a été désactivé ou supprimé. Veuillez contacter l'administrateur système.",
+    "requires-recent-login": "Veuillez vous reconnecter et réessayer !",
+    "email-already-exists": "L'adresse e-mail est déjà utilisée par un utilisateur existant",
+    "user-not-found": "Nous n'avons pas pu trouver le compte utilisateur associé à l'adresse e-mail ou au numéro de téléphone.",
+    "phone-number-already-exists": "Le numéro de téléphone est déjà utilisé par un utilisateur existant.",
+    "invalid-phone-number": "Le numéro de téléphone n'est pas un numéro de téléphone valide !",
+    "invalid-email": "L'adresse e-mail n'est pas une adresse e-mail valide !",
+    "invalid-action-code": "Le code d'action n'est pas valide. Cela peut arriver si le jeton est mal formé, a expiré ou a déjà été utilisé.",
+    "cannot-delete-own-user-account": "Vous ne pouvez pas supprimer votre propre compte utilisateur.",
+    "default": "Oups ! Quelque chose s'est mal passé. Réessayez plus tard."
+  },
+  "buttons": {
+    "invite": "Inviter",
+    "cancel": "Annuler",
+    "play": "Jouer",
+    "return-back": "Retourner en arrière",
+    "permission": "Gest. des permissions",
+    "manage": "Gérer",
+    "send": "Envoyer",
+    "manage_projects": "Gérer les projets",
+    "manage_project": "Gérer ce projet",
+    "config": "Configurer",
+    "new": "Nouveau",
+    "read": "Lire",
+    "continious": "Continuer",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "exit": "Quitter",
+    "previewing": "Prévisualisation",
+    "update": "Modifier",
+    "edit": "Editer",
+    "view": "Voir",
+    "referentiel": "Référentiel",
+    "add": "Ajouter",
+    "plan": "Planifier",
+    "prevu": "Prévu",
+    "realise": "Réalise",
+    "follow": "Suivre",
+    "add_root": "Ajouter un élément racine",
+    "back": "Retour",
+    "close": "Fermer",
+    "next": "Suivant",
+    "prev": "Précedent",
+    "pass_step": "Passer l'étape",
+    "ok": "OK",
+    "yes": "Oui",
+    "no": "Non",
+    "install": "Installer",
+    "revise": "Réviser",
+    "create": "Créer",
+    "details": "Détails",
+    "see": "Voir",
+    "see_details": "Voir en detail",
+    "preview": "Prévisualiser",
+    "block": "Bloquer",
+    "all": "Tous",
+    "valide": "Valider",
+    "create_activity": "Créer une nouvelle activité"
+  },
+  "menus": {
+    "super-admin": {
+      "tailes": "Contes",
+      "collections": "Collections",
+      "authors": "Auteurs",
+      "contracts": "Contrats",
+      "settings": "Paramètres",
+      "users": "Utilisateurs",
+      "datas": "Données",
+      "languages": "Langues",
+      "categories": "Catégories",
+      "tags": "Etiquêttes",
+      "applications": "Applications",
+      "transactions": "Transactions",
+      "admin-list": "Administrations"
+    },
+    "customer-admin": {
+      "customers": "Clients",
+      "litigation": "Litiges",
+      "invoice": "Gest. des Factures",
+      "confirm": "Confirmer",
+      "no-confirm": "Non confirmer",
+      "resolve": "Résolus",
+      "provider-list": "Gest. des fournisseurs",
+      "providers": "Fournisseurs",
+      "investors": "Investisseurs",
+      "investor-list": "Gest. des investisseurs",
+      "administration": "Administration",
+      "admin-list": "Gest. des administrateurs",
+      "no-resolve": "Non résolus"
+    },
+    "provider-admin": {
+      "customers": "Clients",
+      "litigation": "Litiges",
+      "confirm": "Confirmer",
+      "no-confirm": "Non confirmer",
+      "resolve": "Résolus",
+      "invoice-list": "Gest. des factures",
+      "providers": "Fournisseurs",
+      "investors": "Investisseurs",
+      "investor-list": "Gest. des investisseurs",
+      "administration": "Administration",
+      "admin-list": "Gest. des administrateurs",
+      "no-resolve": "Non résolus"
+    }
+  },
+  "swal": {
+    "validate": {
+      "title": "Êtes vous sûr?",
+      "text": "Vous êtes sur le point de valider le compte de cet utilisateur",
+      "confirmButtonText": "VALIDER",
+      "cancelButtonText": "Annuler",
+      "confirmed": {
+        "title": "Validé",
+        "html": "Utilisateur bloqué avec succès"
+      },
+      "canceled": {
+        "title": "Annuler",
+        "html": "Opération annulée avec succès"
+      }
+    },
+    "send-invoice": {
+      "title": "Êtes vous sûr de vouloir envoyer cette facture?",
+      "text": "Vous êtes sur le point d'envoyer une facture au client",
+      "confirmButtonText": "Envoyer",
+      "cancelButtonText": "Annuler",
+      "confirmed": {
+        "title": "Validé",
+        "html": "Facture envoyée avec succes"
+      },
+      "canceled": {
+        "title": "Annuler",
+        "html": "Opération annulée avec succès"
+      }
+    },
+    "delete-resource": {
+      "title": "Suppression de ressource",
+      "text": "Vous êtes sur le point de supprimer un élément de la base",
+      "confirmButtonText": "VALIDER",
+      "cancelButtonText": "Annuler",
+      "success": "Élement supprimé avec succès",
+      "error": "Des erreurs sont survenues lors de la suppression, veuillez ressayer svp.",
+      "confirmed": {
+        "title": "Suppression",
+        "html": "Élément supprimé avec succès"
+      },
+      "canceled": {
+        "title": "Annuler",
+        "html": "Opération annulée avec succès"
+      }
+    },
+    "account-manage": {
+      "title": "Gestion des comptes",
+      "text": "Vous êtes sur le point d'activer ou de désactiver le compte d'un utilisateur",
+      "confirmButtonText": "VALIDER",
+      "cancelButtonText": "Annuler",
+      "success": "L'état du compte est modifié avec succès",
+      "error": "Des erreurs sont survenues lors de l'opération, veuillez ressayer svp.",
+      "confirmed": {
+        "title": "Modification",
+        "html": "Compte modifié avec succès"
+      },
+      "canceled": {
+        "title": "Annuler",
+        "html": "Opération annulée avec succès"
+      }
+    },
+    "validate-cover": {
+      "title": "Validation du design",
+      "text": "Vous êtes sur le point de valider le design de ce contenu",
+      "confirmButtonText": "VALIDER",
+      "cancelButtonText": "Annuler",
+      "success": "Design validé avec succès",
+      "error": "Des erreurs sont survenues lors de la validation du contenu, veuillez ressayer svp.",
+      "confirmed": {
+        "title": "Validation du design",
+        "html": "Design validé avec succès"
+      },
+      "canceled": {
+        "title": "Annuler",
+        "html": "La validation est arrêtée avec succès"
+      }
+    },
+    "validate-content": {
+      "title": "Validation du  contenu",
+      "text": "Vous êtes sur le point de valider ce contenu",
+      "confirmButtonText": "VALIDER",
+      "cancelButtonText": "Annuler",
+      "success": "Contenu validé avec succès",
+      "error": "Des erreurs sont survenues lors de la validation du contenu, veuillez ressayer svp.",
+      "confirmed": {
+        "title": "Validation du contenu",
+        "html": "Contenu validé avec succès"
+      },
+      "canceled": {
+        "title": "Annuler",
+        "html": "La validation est arrêtée avec succès"
+      }
+    }
+  }
+}

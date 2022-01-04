@@ -1,0 +1,117 @@
+<ngx-page-main-dashbord
+  [title]="'grid.languages.model' | translate"
+  [hasBody]="true"
+>
+  <div body-content class="container-fluid mt--6" *ngIf="true;">
+    <div class=" row">
+      <div class="col-12">
+        <div class=" card">
+          <div class="card-header">
+            <h5 class="h3 mb-0pt-lg-3 pb-lg-1 text-right">
+              <button
+                type="button" class="btn btn-outline-default"
+                routerLink="/languages/create"
+              >
+                <i class="fa fa-plus"></i>
+                {{ 'buttons.new' | translate }}
+              </button>
+            </h5>
+          </div>
+          <div class=" card-body">
+            <div class="dataTables_wrapper" *ngIf="!loading; else loadingTemplate">
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div class="dataTables_length" id="datatable_length">
+                    <label>
+                      {{ 'grid.show' | translate }}
+                      <select
+                        name="datatable_length"
+                        aria-controls="datatable"
+                        class="form-control form-control-sm"
+                        (change)="entriesChange($event)"
+                      >
+                        <option value="10" [selected]="entries == 10">10</option>
+                        <option value="25" [selected]="entries == 25">25</option>
+                        <option value="50" [selected]="entries == 50">50</option>
+                        <option value="-1" [selected]="entries == -1"> {{ 'buttons.all' | translate }} </option>
+                      </select>
+                      {{ 'grid.entries' | translate }}
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div id="datatable_filter" class="dataTables_filter">
+                    <label>
+                      <input
+                        type="search"
+                        class="form-control form-control-sm"
+                        placeholder="{{ 'grid.datatable.search' | translate }}"
+                        aria-controls="datatable"
+                        (keyup)="filterTable($event)"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <ngx-datatable
+                class="bootstrap selection-cell"
+                [columnMode]="'force'"
+                [headerHeight]="50"
+                [footerHeight]="60"
+                [rowHeight]="'auto'"
+                [limit]="entries != -1 ? entries : undefined"
+                [rows]="temp"
+                (activate)="onActivate($event)"
+              >
+                <ngx-datatable-column prop="title" [name]="'grid.languages.title' | translate">
+                  <ng-template let-item="row" let-value="value" ngx-datatable-cell-template>
+                    <td>
+                      <span class="text-uppercase">{{ item.code }}</span> - {{ item.title }}
+                    </td>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column [name]="'grid.actions' | translate" [sortable]="false" prop="key" [maxWidth]="100"
+                                      style="float: right">
+                  <ng-template let-item="row" let-value="value" ngx-datatable-cell-template>
+                    <td>
+                      <div class="dropdown">
+                        <a
+                          class="btn btn-sm btn-icon-only text-light"
+                          id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        >
+                          <i class=" fas fa-ellipsis-v"> </i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                             aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="javascript:void()">{{ 'grid.actions' | translate }}</a>
+                          <a
+                            type="button" class="dropdown-item"
+                            [routerLink]="'/languages/update/'+ item.id"
+                          >
+                            {{ 'buttons.update' | translate }}
+                          </a>
+                          <a
+                            type="button" class="dropdown-item"
+                            (click)="questionToDelete(item.id)"
+                          >
+                            {{ 'buttons.delete' | translate }}
+                          </a>
+                        </div>
+                      </div>
+                    </td>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ngx-page-main-dashbord>
+
+<ng-template #loadingTemplate>
+  <app-custom-loader></app-custom-loader>
+</ng-template>
