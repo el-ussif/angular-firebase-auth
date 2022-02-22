@@ -11,8 +11,8 @@ export class LoginComponent implements OnInit {
   focus: boolean = false;
   focus1: boolean = false;
   credential: any = {
-    email: 'elyoussifaw@gmail.com',
-    password: '00000000',
+    email: '',
+    password: '',
   };
 
   constructor(
